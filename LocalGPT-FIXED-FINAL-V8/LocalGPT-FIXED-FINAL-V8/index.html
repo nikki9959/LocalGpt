@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LocalGPT</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;font-family:Inter,Segoe UI,Arial,sans-serif;background:#05070d;color:#f4f6fb;overflow:hidden}button,input,textarea{font:inherit}.app{height:100vh;display:flex;background:#05070d}.sidebar{width:290px;background:rgba(8,10,18,.96);border-right:1px solid #202536;display:flex;flex-direction:column;padding:14px}.brand{font-size:20px;font-weight:800;letter-spacing:.2px;margin:3px 5px}.tag{font-size:11px;color:#7f8aa3;margin:3px 5px 13px}.new{width:100%;border:1px solid #2d374e;background:#171c2a;color:#fff;border-radius:10px;padding:10px 12px;cursor:pointer;font-weight:700}.new:hover{background:#20283a}.chathead{font-size:11px;color:#657089;text-transform:uppercase;letter-spacing:.08em;margin:20px 5px 8px}.chats{flex:1;overflow:auto}.chatitem{padding:10px 10px;border-radius:10px;cursor:pointer;margin:3px 0;border:1px solid transparent}.chatitem:hover{background:#121724}.chatitem.active{background:#1a2030;border-color:#30394e}.ctitle{font-size:13px;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cfiles{font-size:10px;color:#6e7890;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:4px}.bottom{border-top:1px solid #202536;padding-top:10px;color:#69748b;font-size:10px;line-height:1.45}.main{flex:1;min-width:0;position:relative;display:flex;flex-direction:column}.landing{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(ellipse at 50% 42%,#273d68 0%,#101a31 28%,#080c17 56%,#04060b 100%)}.landing:before{content:"";position:absolute;inset:-20%;background:radial-gradient(circle at 15% 25%,rgba(89,148,255,.25),transparent 24%),radial-gradient(circle at 82% 30%,rgba(178,104,255,.20),transparent 25%),radial-gradient(circle at 50% 75%,rgba(50,210,255,.12),transparent 28%);filter:blur(30px)}.stars{position:absolute;inset:0;background-image:radial-gradient(#fff 1px,transparent 1px),radial-gradient(#8fbaff 1px,transparent 1px);background-size:83px 83px,137px 137px;background-position:12px 20px,50px 70px;opacity:.35}.hero{position:relative;text-align:center;z-index:2}.hero h1{font-size:56px;margin:0 0 10px;letter-spacing:-2px}.hero p{color:#aeb8cd;font-size:15px;margin:0 0 22px}.hero .orb{width:82px;height:82px;margin:0 auto 22px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#79bfff 22%,#576eff 47%,#9c4cff 72%,transparent 73%);box-shadow:0 0 60px rgba(91,136,255,.55)}.top{height:64px;border-bottom:1px solid #202536;padding:0 22px;display:flex;align-items:center;justify-content:space-between;background:#070a11}.topname{font-weight:750}.topsub{font-size:11px;color:#71809c;margin-top:3px}.model{font-size:10px;color:#7f8aa0;border:1px solid #273047;border-radius:99px;padding:6px 9px}.chat{flex:1;overflow:auto;padding:26px 7%;background:#070910}.messages{max-width:980px;margin:auto}.welcome{text-align:center;color:#6e7890;padding-top:20vh}.welcome h2{color:#eef2fb;margin-bottom:7px}.msg{max-width:86%;padding:13px 15px;border-radius:15px;margin:13px 0;white-space:pre-wrap;line-height:1.52;font-size:14px}.msg.user{margin-left:auto;background:#202738}.msg.ai{background:#101521;border:1px solid #202a3d}.msg.summary{border-left:3px solid #7795ff}.attachments{border-bottom:1px solid #202536;padding:12px 7%;background:#090c14}.attachinner{max-width:980px;margin:auto;display:flex;gap:8px;align-items:center;overflow:auto}.filechip{flex:0 0 auto;border:1px solid #29334a;background:#111725;border-radius:9px;padding:7px 9px;font-size:11px;color:#b9c3d6;display:flex;gap:7px;align-items:center}.filechip button{background:transparent;color:#77839b;border:0;cursor:pointer;padding:0}.composer{border-top:1px solid #202536;padding:14px 7%;background:#080b12}.composeinner{max-width:980px;margin:auto;display:flex;gap:9px}.textarea{flex:1;background:#111622;border:1px solid #2a354b;color:#fff;border-radius:13px;padding:13px;min-height:52px;max-height:150px;resize:none;outline:none}.textarea:focus{border-color:#526a9c}.send,.attach{border:0;border-radius:12px;padding:0 18px;background:#f0f2f7;color:#0a0d14;font-weight:800;cursor:pointer}.attach{background:#20283a;color:#dce3f1;font-size:20px}.send:disabled{opacity:.4}.upload{display:none}.hidden{display:none}@media(max-width:750px){.sidebar{width:220px}.msg{max-width:94%}.hero h1{font-size:40px}}
+</style></head>
+<body><div class="app">
+<aside class="sidebar"><div class="brand">LocalGPT</div><div class="tag">Private local document intelligence</div><button class="new" id="newChat">＋ New chat</button><div class="chathead">Chats</div><div id="chatList" class="chats"></div><div class="bottom">Each chat is isolated. Files attached to one chat are never used in another chat.<br><br>Local AI • Ollama</div></aside>
+<main class="main">
+<div id="landing" class="landing"><div class="stars"></div><div class="hero"><div class="orb"></div><h1>LocalGPT</h1><p>Private AI for your files. Everything stays on your computer.</p><button class="new" id="heroNew">＋ Start a new chat</button></div></div>
+<header id="top" class="top hidden"><div><div id="chatTitle" class="topname">New chat</div><div id="chatSub" class="topsub">Attach files to this chat</div></div><div id="status" class="model">Checking Ollama…</div></header>
+<section id="chat" class="chat hidden"><div id="messages" class="messages"></div></section>
+<section id="attachments" class="attachments hidden"><div id="attachInner" class="attachinner"></div></section>
+<form id="composer" class="composer hidden"><div class="composeinner"><label class="attach" title="Attach files">＋<input id="fileInput" class="upload" type="file" multiple accept=".pdf,.docx,.pptx,.xlsx,.txt,.md,.csv,.json,.png,.jpg,.jpeg,.webp,.bmp,.gif"></label><textarea id="q" class="textarea" placeholder="Attach files and ask anything…"></textarea><button class="send" id="send">Send</button></div></form>
+</main></div>
+<script>
+const $=id=>document.getElementById(id);let chats=[];let active=null;let files=[];const busyChats=new Set();let openSeq=0;const drafts={};
+const icon=f=>f?.is_image?'🖼️':f?.extension==='.pdf'?'📄':'📎';
+const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+async function api(url,opt={}){const r=await fetch(url,opt);const x=await r.json().catch(()=>({error:'Invalid server response'}));if(!r.ok)throw Error(x.error||'Request failed');return x}
+function activeChat(){return chats.find(c=>c.id===active)}
+function chatFiles(c){return (c?.file_ids||[]).map(id=>files.find(f=>f.id===id)).filter(Boolean)}
+function renderChats(){const box=$('chatList');box.innerHTML='';for(const c of chats){const d=document.createElement('div');d.className='chatitem'+(c.id===active?' active':'');const fs=chatFiles(c).map(f=>f.display_name).join(' • ');d.innerHTML=`<div class="ctitle">${esc(c.title||'New chat')}</div><div class="cfiles">${esc(fs||'No files attached')}</div>`;d.onclick=()=>openChat(c.id);box.appendChild(d)}}
+function renderLanding(){const show=!active;$('landing').classList.toggle('hidden',!show);$('top').classList.toggle('hidden',show);$('chat').classList.toggle('hidden',show);$('attachments').classList.toggle('hidden',show);$('composer').classList.toggle('hidden',show)}
+function renderMessages(){const c=activeChat();const box=$('messages');box.innerHTML='';if(!c||!c.messages?.length){box.innerHTML=`<div class="welcome"><h2>${esc(c?.title||'New chat')}</h2><div>Attach one or more files, then ask a question.</div></div>`;return}for(const m of c.messages){const d=document.createElement('div');d.className='msg '+(m.role==='user'?'user':'ai')+(m.type==='summary'?' summary':'');d.textContent=m.content;box.appendChild(d)}box.parentElement.scrollTop=box.parentElement.scrollHeight}
+function renderAttachments(){const c=activeChat();const box=$('attachInner');box.innerHTML='';for(const f of chatFiles(c)){const d=document.createElement('div');d.className='filechip';d.innerHTML=`<span>${icon(f)}</span><span>${esc(f.display_name)}</span>`;box.appendChild(d)}if(!chatFiles(c).length){box.innerHTML='<span style="color:#657089;font-size:11px">No files attached — use ＋ to add multiple files.</span>'}}
+async function openChat(id){
+  if(active && active!==id) drafts[active]=$('q').value;
+  active=id; const seq=++openSeq; const c=activeChat(); if(!c)return;
+  renderLanding(); $('chatTitle').textContent=c.title||'New chat'; $('chatSub').textContent=chatFiles(c).length?chatFiles(c).map(f=>f.display_name).join(' • '):'Attach files to this chat';
+  $('q').value=drafts[id]||''; renderChats(); renderAttachments(); renderMessages();
+  try{
+    const x=await api('/api/chat/'+id);
+    if(seq!==openSeq || active!==id)return;
+    const idx=chats.findIndex(z=>z.id===id);
+    if(idx>=0){chats[idx]=x; renderChats(); renderAttachments(); renderMessages();}
+  }catch{}
+}
+async function newChat(){const c=await api('/api/new-chat',{method:'POST'});chats.unshift(c);await openChat(c.id)}
+async function refresh(){try{const x=await api('/api/status');files=x.files||[];$('status').textContent=x.ollama?`● ${x.model}`:'● Ollama offline';$('status').style.color=x.ollama?'#9fdaae':'#ff9b9b';const y=await api('/api/chats');chats=y.chats||[];renderChats();if(active&&chats.some(c=>c.id===active)){const c=activeChat();$('chatTitle').textContent=c.title||'New chat';$('chatSub').textContent=chatFiles(c).length?chatFiles(c).map(f=>f.display_name).join(' • '):'Attach files to this chat';renderAttachments()}else if(!active)renderLanding()}catch{$('status').textContent='Server offline'}}
+$('newChat').onclick=newChat;$('heroNew').onclick=newChat;
+$('fileInput').onchange=async e=>{
+  if(!e.target.files.length)return;
+  if(!active)await newChat();
+  const c=activeChat(); const fd=new FormData(); for(const f of e.target.files)fd.append('files',f);
+  $('status').textContent='Reading files…';
+  try{
+    const x=await api('/api/upload',{method:'POST',body:fd});
+    for(const f of x.files){if(!files.some(z=>z.id===f.id))files.push(f);if(!c.file_ids.includes(f.id))c.file_ids.push(f.id);}
+    if(c.title==='New chat'){c.title=x.files.length===1?x.files[0].display_name:(x.files[0].display_name+' + '+(x.files.length-1)+' more files')}
+    await api('/api/update-chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:c.id,title:c.title,file_ids:c.file_ids})});
+    $('chatTitle').textContent=c.title; $('chatSub').textContent=chatFiles(c).map(f=>f.display_name).join(' • '); renderChats(); renderAttachments(); renderMessages();
+  }catch(err){alert(err.message)}
+  finally{e.target.value=''; refresh();}
+};
+$('composer').onsubmit=async e=>{
+  e.preventDefault();
+  const q=$('q').value.trim(), c=activeChat(); if(!q||!c)return;
+  if(busyChats.has(c.id)){return;}
+  const chatId=c.id; if(busyChats.has(chatId))return;
+  const fileIds=[...(c.file_ids||[])]; drafts[chatId]=''; busyChats.add(chatId); $('send').disabled=true; $('status').textContent='● Thinking…'; $('q').value='';
+  c.messages=c.messages||[]; c.messages.push({role:'user',content:q}); renderMessages();
+  try{
+    const x=await api('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:chatId,file_ids:fileIds,query:q})});
+    const target=chats.find(z=>z.id===chatId); if(target){target.messages=target.messages||[]; target.messages.push({role:'assistant',content:x.response}); if(target.title==='New chat')target.title=q.slice(0,42); target.updated_at=Date.now()/1000;}
+    if(active===chatId){renderMessages();renderChats();}
+  }catch(err){const target=chats.find(z=>z.id===chatId);if(target){target.messages=target.messages||[];target.messages.push({role:'assistant',content:err.message});}if(active===chatId)renderMessages();}
+  finally{busyChats.delete(chatId);$('send').disabled=false;if(active===chatId){$('status').textContent='● Ready';$('q').focus();drafts[chatId]='';}}
+};
+$('q').addEventListener('input',()=>{if(active)drafts[active]=$('q').value});
+$('q').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();$('composer').requestSubmit()}});
+refresh();
+</script></body></html>

@@ -1,0 +1,50 @@
+[PAGE 1]
+Samarla Nikhil
++91 9392562131 | nikhilsamarla3@gmail.com
+—
+LinkedIn
+—
+GitHub
+Professional Summary
+Artificial Intelligence and Machine Learning undergraduate with hands-on experience in Machine Learning, Java, Web
+Development, and Data Analysis. Skilled in developing predictive models, data preprocessing, and software development.
+Passionate about solving real-world problems using AI technologies and actively seeking internship opportunities to
+enhance technical and professional skills.
+Education
+Bachelor of Technology (Artificial Intelligence and Machine Learning)
+2023 – 2027
+St. Martin’s Engineering College, Hyderabad
+CGPA: 7.5
+Technical Skills
+Programming Languages: Java, Python
+Web Technologies: HTML, CSS, JavaScript
+Machine Learning: Classification Models
+Tools & Platforms: VS Code, Git, GitHub
+Core Subjects: Data Structures, DBMS, Software Engineering, Computer Networks
+Projects
+SignPAL – Real-Time Sign Language Translation System
+ Built an AI-based real-time sign language recognition system to reduce the communication gap between sign-language
+users and non-signers.
+ Captured live webcam video and used MediaPipe to detect hand landmarks and extract gesture features.
+ Trained a machine-learning model to classify predefined gestures and display the recognized sign through an interactive
+Streamlit interface.
+ Designed the system to be extensible, allowing additional signs and gestures to be added in the future.
+Internship Training
+Java Internship – Niltech Edu
+Oct 2024
+ Learned Object-Oriented Programming, Exception Handling, and File Handling concepts.
+ Implemented Java programs and strengthened logical problem-solving skills.
+Web Technologies Internship – ULS Technologies
+Mar 2024
+ Developed responsive web pages using HTML, CSS, and JavaScript.
+ Gained practical exposure to front-end web development.
+Certifications
+ Java and Its Industry Applications – Niltech Edu (2024)
+ Internship on Web Technologies – ULS Technologies (2024)
+ Oracle Generative AI Certification
+Achievements & Awards
+ Advanced to the Final Round of Quantanova Hackathon 2025, competing among top teams and showcasing
+innovative solutions to real-world challenges.
+ Participated in a Conference on Face Mask Detection (2024).
+Languages
+Telugu (Native), English (Professional), Hindi (Basic)
